@@ -35,7 +35,12 @@
 </div>
 
   <h3>Submissions</h3>
-  <%= smart_listing_render_controller :submissions %>
+  <%# could it be that, if the index.js.erb is not working, it needs to get the smart_listing_update (now _foo) method? %>
+  <% unless params["submissions_smart_listing"] && params["submissions_smart_listing"]["page"].present? %>
+    <%= smart_listing_render_controller :submissions %>
+  <% else %>
+    <%= smart_listing_foo :submissions %>
+  <% end %>
 
   <% if admin? %>
     <%= link_to "New Submission", new_site_registration_url(@site, @submission) %>
