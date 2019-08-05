@@ -41,6 +41,10 @@ gem 'font-awesome-rails', '~> 4.5'
 gem 'paperclip'
 gem 'aws-sdk-s3'
 gem 'devise'
+gem 'active_model_serializers'
+gem 'rack-attack'
+gem 'webpacker'
+gem 'react_on_rails', '11.2.1' 
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -76,3 +80,5 @@ gem 'rails_12factor', group: :production
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'mini_racer', platforms: :ruby
