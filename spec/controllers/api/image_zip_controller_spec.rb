@@ -21,18 +21,28 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
 
     context "with authentication" do
       headers = { 'Authorization' => "Token #{ENV["API_TOKEN"]}" }
-
-      before { get '/api/v1/zip_images', params: params, headers: headers, as: :json }
-
+      subject { get '/api/v1/zip_images', params: params, headers: headers, as: :json }
+       
       it "returns http success" do
+        subject
         expect(response).to have_http_status(:redirect)
+      end
+
+      Sidekiq::Testing.inline! do
+        it "calls submission zip worker" do
+          expect{ subject }.to change(SubmissionZipWorker.jobs, :size).by(1) 
+        end
+      end
+
+      context "if folder already present" do
+        # it deletes it
       end
     end
   end
   
 
 
-  describe "GET #download_zip" do
+  xdescribe "GET #download_zip" do
 
     context "without authentication" do
       before { get '/api/v1/download_zip' }
@@ -65,7 +75,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
           expect(response.content_type).to eq "application/zip"
         end
         
-        xit "logs message" do
+        it "logs message" do
           expect(Rails.logger).to receive(:info).with("Zip file downloading")
           get '/api/v1/download_zip', headers: headers, as: :json
         end
@@ -81,7 +91,7 @@ RSpec.describe Api::V1::ImageZipController, :type => :request do
           allow(Rails.logger).to receive(:info)
         end
 
-        xit "returns error message" do
+        it "returns error message" do
           expect(Rails.logger).to receive(:info).with("Zip folder not present, try again later")
           get '/api/v1/download_zip', headers: headers, as: :json
         end
