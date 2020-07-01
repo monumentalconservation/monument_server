@@ -54,17 +54,43 @@ module Api
       private
 
         def create_basic_submissions_report
-          attributes = %w{submission-id site-name record-taken type-name}
+          attributes = %w{submission-id site-name record-taken record-submitted type-name participant-id at-home}
           CSV.generate(headers: true) do |csv|
             csv << attributes
 
             Submission.all.each do |submission|
-              row = [submission.id, submission.site.name, submission.record_taken.strftime("%d/%m/%Y"), submission.type.name]
+              record_submitted = submission.submitted_at || submission.created_at
+              participant_id = find_participant_id(submission.type)
+              at_home = submission.tag_list.include?("at home")
+              row = [
+                submission.id, 
+                submission.site.name, 
+                submission.record_taken.strftime("%d/%m/%Y"), 
+                record_submitted.strftime("%d/%m/%Y"),
+                submission.type.name,
+                participant_id,
+                at_home
+              ]
               csv << row
             end
           end
         end
 
+        # def at_home()
+
+        def find_participant_id(type)
+          if type.name == "WHATSAPP"
+            type.data['number']
+          elsif type.name == "EMAIL"
+            type.data['email_address']
+          elsif  type.name == "INSTAGRAM"
+            type.data['insta_username']
+          elsif type.name == "TWITTER"
+            type.data['twitter_username']
+          else
+            "something went wrong with the type"
+          end
+        end
 
         # creates report on specific type
         def create_specific_type_report(name, data)
