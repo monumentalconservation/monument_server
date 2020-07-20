@@ -23,7 +23,7 @@ module Api
         name = Site.find(params[:site_id]).name
 
         respond_to do |format|
-          format.csv { send_data create_specific_site_report(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
+          format.csv { send_data create_specific_site_report(params[:site_id]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv"  }
         end
       end
 
@@ -109,25 +109,32 @@ module Api
         end
 
         # Normal
-        def create_specific_site_report(site_id, from_date, to_date)
-          attributes = %w{date submissions ind-submitters}
+        def create_specific_site_report(site_id)
+          attributes = %w{submission-id site-name record-taken record-submitted type-name participant-id at-home circle-view}
           CSV.generate(headers: true) do |csv|
             csv << attributes
             
             submissions_hash = {}
-            submissions = Submission.
-                            where(site_id: site_id).
-                            where("record_taken >= :start_date AND created_at <= :end_date",
-                               {start_date: Date.today- 1.year, end_date: Date.today}).
-                            order(:record_taken)
+            submissions = Site.find(site_id).submissions
             
-             
-            (from_date.to_date).upto(to_date.to_date) do |date|
-              subs = submissions.where(record_taken: date)
-              total_subs = subs.count
-              unique_submitters = subs.map {|q| q.type.data}.uniq.count
+            submissions.each do |s|
+              record_submitted = s.submitted_at || s.created_at
+              participant_id = find_participant_id(s.type)
+              tag_list = s.tag_list
+              at_home = tag_list.include?("at home")
+              circle = tag_list.include?("cairn entrance" || "central SS")
+              row = [
+                s.id, 
+                s.site.name, 
+                s.record_taken.strftime("%d/%m/%Y"), 
+                record_submitted.strftime("%d/%m/%Y"),
+                s.type.name,
+                participant_id,
+                at_home,
+                circle
+              ]
               
-              csv << [date.strftime("%d/%m/%Y"), total_subs, unique_submitters]
+              csv << row
             end
           end
         end
