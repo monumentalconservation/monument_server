@@ -16,10 +16,10 @@ bs rails s
 ## Download backup and restore DB:
 heroku pg:backups:capture --app monument-monitor
 heroku pg:backups:download --app monument-monitor
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -U roo -d monumental_server_development latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U roo -d dino_monitor_development latest.dump
 
 Create dump file
-PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U roo monumental_sever_production > ms_prod.dump
+PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U roo dino_monitor_production > ms_prod.dump
 
 
 ## Run instagram scraper

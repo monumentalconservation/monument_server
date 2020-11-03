@@ -4,7 +4,7 @@ require 'open-uri'
 
 class TwitterJob
   def perform
-    client.search("#monumentmonitor").each do |tweet|
+    client.search("#dinosaurmonitor").each do |tweet|
     if !tweet.retweet? && tweet.media.present?
       tweet.media.each do |media|
           # this makes sure that tweets saved previously are not saved again

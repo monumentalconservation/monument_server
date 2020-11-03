@@ -102,7 +102,7 @@ export default class Form extends React.Component {
             </span>
           </div>
           
-          <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
+          {/* <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/> */}
 
         </form>
     )

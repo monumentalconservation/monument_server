@@ -4,21 +4,14 @@
   <div class="w-100 flex flex-column">
 
     <div class="fw9 mb2">
-      <%= @site.name %>
+      <h4 class="f2"><%= @site.name %></h4>
     </div>
 
     <div class="fw9 mv2">
-      <%= @site.pic_id %>
+      <%= @site.notes["informal_description"] %>
     </div>
 
-    <div class="mv2">
-      <span class="fw9 db">Visits per annum: <%= @site.visits %></span>
-      
-    </div>
-
-    <div class="mv2">
-      <span class="fw9 db">Visitors per annum: <%= @site.visitors %></span>
-    </div>
+    
 
   </div>
    <!-- <div class="w-50">

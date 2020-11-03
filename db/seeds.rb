@@ -1,165 +1,300 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+SiteGroup.create([
+  {
+    name: "The Ice Age"
+  },
+  {
+    name: "Tropical Tertiary"
+  },
+  {
+    name: "Chalk Seas"
+  },
+  {
+    name: "Dinosaurs from the Weald"
+  },
+  {
+    name: "Mary Anning’s marine reptiles"
+  },
+  {
+    name: "Jurassic Park"
+  },
+  {
+    name: "New Red tetrapods"
+  },
+  {
+    name: "Ancient Britain"
+  },
+  {
+    name: "Unsorted"
+  },
+  {
+    name: "Not relevant"
+  }
+])
+
 
 Site.create([
   {
-    name: "Machrie Moor Standing Circles",
-    latitude: 55.5575703,
-    longitude: -5.357919614,
-    pic_id: "PIC092",
-    visits: 12,
-    visitors: 40000
+    name: "Megaloceros female",
+    notes: { informal_description: "Irish Elk - female lying down" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Ness of Burgi",
-    latitude: 59.8596424,
-    longitude: -1.3279295,
-    pic_id: "PIC259",
-    visits: 4,
-    visitors: 1000
+    name: "Megaloceros male A",
+    notes: { informal_description: "Irish Elk - lower standing male" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Achnabrech cup and ring marks",
-    latitude: 56.1350324,
-    longitude: -5.4734568,
-    pic_id: "PIC048",
-    visits: 52,
-    visitors: 53000
+    name: "Megaloceros male B",
+    notes: { informal_description: "Irish Elk - higher standing male" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Baluachraig cup and ring marks",
-    latitude: 56.1350324,
-    longitude: -5.4734568,
-    pic_id: "PIC053",
-    visits: 52,
-    visitors: 53000
+    name: "Megaloceros fawn",
+    notes: { informal_description: "Irish Elk - sitting fawn" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Lochranza Castle",
-    latitude: 55.7052098,
-    longitude: -5.2932707,
-    pic_id: "PIC090",
-    visits: 12,
-    visitors: 20000
+    name: "Glacial gravels",
+    notes: { informal_description: "geological illustration - bases to Megaloceros (Irish Elk)" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Carn Ban Long Cairn",
-    latitude: 55.488153,
-    longitude: -5.1829510,
-    pic_id: "PIC059",
-    visits: 12,
-    visitors: 3400
+    name: "Megatherium",
+    notes: { informal_description: "giant sloth" },
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
+
   },
   {
-    name: "Rothesay Castle",
-    latitude: 55.8365652,
-    longitude: -5.0575237,
-    pic_id: "PIC123",
-    visits: 52,
-    visitors: 11502
+    name: "Argentinian gravels",
+    notes: { informal_description: "geological illustration - flint gravel below the giant sloth"},
+    site_group_id: SiteGroup.find_by(name: "The Ice Age").id
   },
   {
-    name: "Castle Semple Collegiate Church",
-    latitude: 55.8068912,
-    longitude: -4.595713,
-    pic_id: "PIC116",
-    visits: 12,
-    visitors: 4000
+    name: "Anoplotherium commune (standing)",
+    notes: { informal_description: "camel-like Tertiary mammal - standing"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
   },
   {
-    name: "St Blane's church",
-    latitude: 55.9626101,
-    longitude: -4.7803461,
-    pic_id: "PIC125",
-    visits: 12,
-    visitors: 2000
+    name: "Anoplotherium (lying)",
+    notes: { informal_description: "camel-like Tertiary mammal - lying down"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
+  },  
+  {
+    name: "Anoplotherium commune (rearing)",
+    notes: { informal_description: "camel-like Tertiary mammal - standing with rearing head"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
   },
   {
-    name: "Drumtroddan cup and ring marks",
-    latitude: 54.7705982,
-    longitude: -4.5487917,
-    pic_id: "PIC192",
-    visits: 4,
-    visitors: 1500
+    name: "Palaeotherium (standing)",
+    notes: { informal_description: "long-nosed Tertiary mammal - standing"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
   },
   {
-    name: "Drumtroddan standing stones",
-    latitude: 54.7669095,
-    longitude: -4.5458695,
-    pic_id: "PIC193",
-    visits: 4,
-    visitors: 1500
+    name: "Palaeotherium (sitting)",
+    notes: { informal_description: "long-nosed Tertiary mammal - sitting"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
   },
   {
-    name: "Loch Doon Castle",
-    latitude: 55.2445084,
-    longitude: -4.4085835,
-    pic_id: "PIC202",
-    visits: 4,
-    visitors: 1000
+    name: "Palaeotherium 3",
+    notes: { informal_description: "Missing - a third Palaeotherium was originally present"},
+    site_group_id: SiteGroup.find_by(name: "Tropical Tertiary").id
   },
   {
-    name: "Bothwell Castle, (Douglas Tower)",
-    latitude: 55.8094534,
-    longitude: -4.0971186,
-    pic_id: "PIC114",
+    name: "Cretaceous Pterodactyl A",
+    notes: { informal_description: "Pterosaur with outstretched wings"},
+    site_group_id: SiteGroup.find_by(name: "Chalk Seas").id
   },
   {
-    name: "Caerlaverock Castle",
-    latitude: 54.9756934,
-    longitude: -3.5262428,
-    pic_id: "PIC182",
+    name: "Cretaceous Pterodactyl B",
+    notes: { informal_description: "Pterosaur with folded wings"},
+    site_group_id: SiteGroup.find_by(name: "Chalk Seas").id
   },
   {
-    name: "Tarves Tomb",
-    latitude: 57.3702096,
-    longitude: -2.2211601,
-    pic_id: "PIC269",
-    visits: 4,
-    visitors: 1200
+    name: "Chalk",
+    notes: { informal_description: "geological illustration - Chalk cliff forming base to Pterosaurs" },
+    site_group_id: SiteGroup.find_by(name: "Chalk Seas").id
   },
   {
-    name: "Maiden Stone",
-    latitude: 57.3120442,
-    longitude: -2.4955742,
-    pic_id: "PIC256",
-    visits: 12,
-    visitors: 1200
+    name: "Mosasaurus",
+    notes: { informal_description: "Big marine reptile - by the weir/separate from the others" },
+    site_group_id: SiteGroup.find_by(name: "Chalk Seas").id
   },
   {
-    name: "Tealing Souterrain",
-    latitude: 56.5318328,
-    longitude: -2.9593886,
-    pic_id: "PIC046",
-    visits: 52,
-    visitors: 1000
+    name: "Iguanodon (standing)",
+    notes: { informal_description: "Big dinosaur - standing on rock"},
+    site_group_id: SiteGroup.find_by(name: "Dinosaurs from the Weald").id
   },
   {
-    name: "Tantallon, (Foretower)",
-    latitude: 56.0563593,
-    longitude: -2.6528128,
-    pic_id: "PIC164",
+    name: "Iguanodon (sitting)",
+    notes: { informal_description: "Big dinosaur - partially recumbent"},
+    site_group_id: SiteGroup.find_by(name: "Dinosaurs from the Weald").id
   },
   {
-    name: "Kinneil House",
-    latitude: 56.0072498,
-    longitude: -3.6363886,
-    pic_id: "PIC152",
+    name: "Hylaeosaurus",
+    notes: { informal_description: "Big spiny dinosaur"},
+    site_group_id: SiteGroup.find_by(name: "Dinosaurs from the Weald").id
   },
   {
-    name: "Clava cairns",
-    latitude: 57.473488,
-    longitude: -4.0753611,
-    pic_id: "PIC328",
+    name: "Cycads",
+    notes: { informal_description: "Cylindrical Cretaceous plants"},
+    site_group_id: SiteGroup.find_by(name: "Dinosaurs from the Weald").id
   },
   {
-    name: "Twitter unsorted"
+    name: "Wealden",
+    notes: { informal_description: "geological illustration - Wealden sandstone around and forming bases to the main dinosaurs"},
+    site_group_id: SiteGroup.find_by(name: "Dinosaurs from the Weald").id
   },
   {
-    name: "Instagram unsorted"
+    name: "Megalosaurus",
+    notes: { informal_description: "Big mean dinosaur - Meg"},
+    site_group_id: SiteGroup.find_by(name: "Jurassic Park").id
   },
   {
-    name: "unidentified"
-  }
+    name: "Portlandian Oolite",
+    notes: { informal_description: "geological illustration -base to the Megalosaurus, includes Portlandian tree from the Lulworth Cove fossil forest"},
+    site_group_id: SiteGroup.find_by(name: "Jurassic Park").id
+  },
+  {
+    name: "Jurassic Pterodactyl A",
+    notes: { informal_description: "missing Pterosaur (wings open); higher, beak vertical"},
+    site_group_id: SiteGroup.find_by(name: "Jurassic Park").id
+  },
+  {
+    name: "Jurassic Pterodactyl B",
+    notes: { informal_description: "missing Pterosaur (wings open);lower, beak at 45°"},
+    site_group_id: SiteGroup.find_by(name: "Jurassic Park").id
+  },
+  {
+    name: "Oolite",
+    notes: { informal_description: "geological illustration - yellow Middle Jurassic oolite from the Cotwolds. Was base to the Jurassic pterosaurs"},
+    site_group_id: SiteGroup.find_by(name: "Jurassic Park").id
+  },
+  {
+    name: "Ichthyosaurus communis",
+    notes: { informal_description: "SW Ichthyosaur (large head, big eyes) - unpainted, parallel to path"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Ichthyosaurus tenuirostris",
+    notes: { informal_description: "Central Ichthyosaur (large head, big eyes) - painted, facing away from path"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Ichthyosaurus platyodon",
+    notes: { informal_description: "NE Ichthyosaur (large head, big eyes) - painted, facing toward path"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Plesiosaurus hawkinsii",
+    notes: { informal_description: "SW Plesiosaur (long neck & small head) - facing a <i>Labyrinthodon</i>"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Plesiosaurus dolichoderus",
+    notes: { informal_description: "Central Plesiosaur (long neck & small head) - facing away from path"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Plesiosaurus macrocephalus",
+    notes: { informal_description: "NE Plesiosaur (long neck & small head) - facing toward path"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Teleosaurus A",
+    notes: { informal_description: "crocodile - snout horizontal, nearer the Plesiosaurs"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Teleosaurus B",
+    notes: { informal_description: "crocodile - snout raised, nearer the Megalosaur"},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Lias",
+    notes: { informal_description: "geological illustration - Lias cliff of alternating shale-limestone couplets. Behind the marine reptiles."},
+    site_group_id: SiteGroup.find_by(name: "Mary Anning’s marine reptiles").id
+  },
+  {
+    name: "Labyrinthodon pachygnathus A",
+    notes: { informal_description: "Primitive amphibian - warty skin, separated from the other two"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "Labyrinthodon salamandroides",
+    notes: { informal_description: "Primitive amphibian - smooth skin"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "Labyrinthodon pachygnathus B",
+    notes: { informal_description: "Primitive amphibian - warty skin, hunched, near the smooth backed <i>Labyrinthodon</i>"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "Dicynodon (larger)",
+    notes: { informal_description: "Turtle-like Triassic amphibian - larger, looking at companion"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "Dicynodon (smaller)",
+    notes: { informal_description: "Turtle-like Triassic amphibian - smaller, looking away from companion"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "New Red Sandstone",
+    notes: { informal_description: "geological illustration - Triassic sandstone cliff dipping beneath the Lias"},
+    site_group_id: SiteGroup.find_by(name: "New Red tetrapods").id
+  },
+  {
+    name: "Coal Measures",
+    notes: { informal_description: "geological illustration - cliff of Derbyshire coal measures"},
+    site_group_id: SiteGroup.find_by(name: "Ancient Britain").id
+  },
+  {
+    name: "Mountain Limestone cliff",
+    notes: { informal_description: "geological illustration - Carboniferous limestone cliff, largely destroyed in 1960s, rebuilt in 2002"},
+    site_group_id: SiteGroup.find_by(name: "Ancient Britain").id
+  },
+  {
+    name: "Lead Mine",
+    notes: { informal_description: "geological illustration - lead mine, formerly at the base of the Carboniferous limestone cliff"},
+    site_group_id: SiteGroup.find_by(name: "Ancient Britain").id
+  },
+  {
+    name: "Old Red Sandstone",
+    notes: { informal_description: "geological illustration - Old Red Sanstone"},
+    site_group_id: SiteGroup.find_by(name: "Ancient Britain").id
+  },
+  {
+    name: "Lewisian Gneiss",
+    notes: { informal_description: "geological illustration - boulder"},
+    site_group_id: SiteGroup.find_by(name: "Ancient Britain").id
+  },
+  {
+    name: "Twitter unsorted",
+    notes: { informal_description: "Unsorted submissions taken from daily twitter scraper"},
+    site_group_id: SiteGroup.find_by(name: "Unsorted").id
+  },
+  {
+    name: "Instagram unsorted",
+    notes: { informal_description: "Unsorted images, taken from Instagram scraper"},
+    site_group_id: SiteGroup.find_by(name: "Unsorted").id
+  },
+  {
+    name: "Uploaded unsorted",
+    notes: { informal_description: "Unsorted submissions uploaded via bulk form"},
+    site_group_id: SiteGroup.find_by(name: "Unsorted").id
+  },
+  {
+    name: "Unidentified",
+    notes: { informal_description: "Submissions that are not identifiable"},
+    site_group_id: SiteGroup.find_by(name: "Not relevant").id
+  },
+  {
+    name: "Unsuitable",
+    notes: { informal_description: "Images that are unsuitable"},
+    site_group_id: SiteGroup.find_by(name: "Not relevant").id
+  },
 ])
 
