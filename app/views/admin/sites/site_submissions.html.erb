@@ -7,7 +7,7 @@
       <th>Image</th>
       <th>Site</th>
       <th></th>
-      <th>Date</th>
+      <th>Record Taken</th>
       <th>Tags (manual)</th>
       <th></th>
       <th></th>
@@ -22,7 +22,7 @@
           <td class='image'><%= image_tag(url_for(submission.image.variant(resize:"200x200"))) %></td>
           <td class="sites"><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
           <td>Reliable? <%= f.check_box :reliable, checked: submission.reliable %></td>
-          <td><%= submission.record_taken.strftime("%d/%m/%Y") %></td>
+          <td><%=f.text_field :record_taken, class: :datepicker, :value => submission.record_taken.strftime("%d/%m/%Y") %></td>
           <td><%= f.text_field :tag_list, value: submission.tag_list.to_s, class: "tags" %> </td>
 
           <td><%= link_to "Destroy", admin_submission_path(submission), method: :delete, data: { confirm: "Are you sure?" } %></td>
