@@ -3,6 +3,7 @@ core.BulkUpload = {};
 $(document).on("ready page:load", function() {
   if ($('h3#bulk-upload').size() > 0) {
     core.BulkUpload.readyBulkUpload();
+    core.BulkUpload.readyAutoParticipantFill()
   } 
 });
 
@@ -58,4 +59,17 @@ core.BulkUpload.readyBulkUpload = function() {
       div.innerHTML += response.toString()
     }
   };
+}
+
+core.BulkUpload.readyAutoParticipantFill = function() {
+  $('.participant_id').change(function(e){
+    console.log("FORM CHANGE!")
+    if (this.value.includes("@")) {
+      $("#type_name option[value='EMAIL']").attr("selected", true);
+    } else if (this.value.includes("+")) {
+      $("#type_name option[value='WHATSAPP']").attr("selected", true);
+    } else {
+      return true
+    }
+ });
 }

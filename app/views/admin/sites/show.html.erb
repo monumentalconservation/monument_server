@@ -11,19 +11,14 @@
       <%= @site.notes["informal_description"] %>
     </div>
 
-    
-
   </div>
-   <!-- <div class="w-50">
-     <div id="map"></div> 
-   </div> -->
-  </div>
+</div>
 
-  <%= render template: "admin/sites/site_submissions", site: @site %>
+<%= render template: "admin/sites/site_submissions", site: @site %>
 
 
-  <br/><br/>
-  <%= link_to "View JS CSV", {}, :class => "js-csv" %>
+<br/><br/>
+<%= link_to "View JS CSV", {}, :class => "js-csv" %>
 <br/>
 <br/><br/>
 
