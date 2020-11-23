@@ -1,6 +1,6 @@
 core.Sites = {};
 
-$(document).on("ready page:load", function() {
+$( document ).on('turbolinks:load', function() {
   if ($('h3#site-info').size() > 0) {
     core.Sites.readySiteSubmissionTags()
   } 
