@@ -4,6 +4,7 @@ $(document).on("ready page:load", function() {
   if ($('h3#bulk-upload').size() > 0) {
     core.BulkUpload.readyBulkUpload();
     core.BulkUpload.readyAutoParticipantFill()
+    core.BulkUpload.readyAutoDateFille()
   } 
 });
 
@@ -63,7 +64,6 @@ core.BulkUpload.readyBulkUpload = function() {
 
 core.BulkUpload.readyAutoParticipantFill = function() {
   $('.participant_id').change(function(e){
-    console.log("FORM CHANGE!")
     if (this.value.includes("@")) {
       $("#type_name option[value='EMAIL']").attr("selected", true);
     } else if (this.value.includes("+")) {
@@ -72,4 +72,10 @@ core.BulkUpload.readyAutoParticipantFill = function() {
       return true
     }
  });
+}
+
+core.BulkUpload.readyAutoDateFille = function() {
+  $('input#record_taken').change(function(){
+    $('input#submitted_at').val(this.value)
+  })
 }
