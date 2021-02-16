@@ -18,6 +18,25 @@ Numbers of submissions by type
   </tbody>
 </table>
 
+Submissions by site
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Site name</th>
+      <th>Submission total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @site_numbers.each do |site| %>
+      <tr>
+        <td><%= site[:name] %></td>
+        <td><%= site[:submissions] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 <div class="mb6">
   <h3>Reports on all submissions</h3>
 

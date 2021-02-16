@@ -2,12 +2,11 @@ module Api
   module V1
     class ZipController < BaseController
       def zip_images
-        # binding.pry
         if !(email.present? && site_id.present?)
-          render json: {notce: "Ensure you are logged in, and have selected a site"}
+          render json: {notice: "Ensure you are logged in, and have selected a site"}
         else
           SubmissionZipWorker.perform_async(tmp_archive_dir, site_id, email, type, tags)
-          render json: {notce: "Zip job has been stated, you will be emailed the images soon"}
+          render json: {notice: "Zip job has been stated, you will be emailed the images soon"}
         end
       end
 

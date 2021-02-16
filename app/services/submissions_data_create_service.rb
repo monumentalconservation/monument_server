@@ -22,9 +22,8 @@ class SubmissionsDataCreateService
   private
 
   def create_date_hash(collection, date, column)
-    date_hash = Hash[(0..12).collect { |n| [date.advance(months: n).strftime('%m/%y'), 0] }]
+    date_hash = Hash[(0..24).collect { |n| [date.advance(months: n).strftime('%m/%y'), 0] }]
     collection_by_months = collection.group("TO_CHAR(#{column}, 'MM/YY')").count.sort
-
     date_hash.map do |k, _v|
       { x: k, y: collection_by_months.to_h[k] || 0 }
     end

@@ -66,27 +66,28 @@ export default class DataVis extends React.Component {
         <div className="pa4 mt4 br2 data-box">
           <h2 className="mb4 f1 title mb2">Stats for {this.props.siteName ? this.props.siteName : "all sites"} over the last year</h2>
         
-          <SubmissionBarChart submissionData={monthlyData} participantData={monthlyParticipantData}/>
+          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Submissions</h1>
+          <SubmissionBarChart legend={"Submissions"} data={monthlyData} />
           <hr className="w-60 ml0 mt0"></hr>
 
-          {/* <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Participants</h1>
-          <SubmissionBarChart data={monthlyParticipantData} />
-          <hr className="w-60 ml0 mt0"></hr> */}
+          <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Participants (all sites)</h1>
+          <SubmissionBarChart legend={"Participants"} data={monthlyParticipantData} />
+          <hr className="w-60 ml0 mt0"></hr>
 
           <div className="flex-ns">
             <div className="w-100 w-60-ns">
-              <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Vision AI tags</h1>
-              <TagScatterChart data={tagData} />
+              {/* <h1 className="f2 f1-l lh-title mb0 mt4 data-bold-color">Vision AI tags</h1>
+              <TagScatterChart data={tagData} /> */}
             </div>
             <div>
               <table>
                 <tbody>
-                  <tr>
+                  {/* <tr>
                     <th>Label</th>
                     <th>Tags</th>
                     <th>Av. confidence</th>
                   </tr>
-                  {maxTags.map((tag) => (<tr><td>{tag["label"]}</td><td>{tag["y"]}</td><td>{tag["x"]}</td></tr>))}
+                  {maxTags.map((tag) => (<tr><td>{tag["label"]}</td><td>{tag["y"]}</td><td>{tag["x"]}</td></tr>))} */}
                 </tbody>
               </table>
             </div>
