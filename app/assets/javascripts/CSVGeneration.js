@@ -36,7 +36,8 @@ core.CsvReports.changeURL = function(e) {
   var hrefSiteSpecificPatterns = $( "#site-specific-report" ).attr("href")
   var hrefAllTags = $( "#site-specific-tag-report" ).attr("href")
   var hrefManualTags = $( "#manual-tag-report" ).attr("href")
-  
+  var hrefAtHome = $('#at-home-report').attr("href")
+
   var newSiteSpecficLink = hrefSiteSpecificPatterns.split('?')[0] + '?site_id=' + id + '&from_date=' + fromDate + '&to_date=' + toDate
   $( "#site-specific-report" ).attr("href", newSiteSpecficLink)
 
@@ -45,4 +46,7 @@ core.CsvReports.changeURL = function(e) {
   
   var newManualTagLink = hrefManualTags.split('?')[0] + '?site_id=' + id + '&tag=' + tag
   $( "#manual-tag-report" ).attr("href", newManualTagLink)
+
+  var atHomeLink = hrefAtHome.split('?')[0] + '?site_id=' + id + '&from_date=' + fromDate + '&to_date=' + toDate
+  $( "#at-home-report" ).attr("href", atHomeLink)
 }

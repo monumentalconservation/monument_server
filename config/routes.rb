@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get :site_specific_time_period_report, to: 'csv#site_specific_time_period'
     get :site_specific_tags_report, to: 'csv#site_specific_tags'
     get :tag_specific_report, to: 'csv#tags_report'
+    get :at_home_report, to: 'csv#at_home'
     get :image_quality_report, to: 'csv#image_quality'
   end
   

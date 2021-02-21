@@ -50,15 +50,29 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
     end
   end
 
+  # only really specific to clava and machrie
+  def at_home
+    # returns report of submissions over specific time period, alongside details of 'at home' campaign
+    # binding.pry
+    return unless params[:site_id].present?
+
+    name = Site.find(params[:site_id]).name
+
+    respond_to do |format|
+      format.csv { send_data create_site_report_with_at_home(params[:site_id], params[:from_date], params[:to_date]), filename: "submissions-for-#{name}-tags-#{Date.today}.csv" }
+    end
+  end
+
   private
 
   def create_basic_submissions_report
-    attributes = %w[submission-id site-name record-taken type-name]
+    attributes = %w[submission-id site-name record-taken record-submitted type-name at-home]
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
       Submission.all.each do |submission|
-        row = [submission.id, submission.site_name, submission.record_taken.strftime('%d/%m/%Y'), submission.type_name]
+        submitted_at = submission.submitted_at.present? ? submission.submitted_at : submission.record_taken
+        row = [submission.id, submission.site_name, submission.record_taken.strftime('%d/%m/%Y'), submitted_at.strftime('%d/%m/%Y'), submission.type_name, submission.tag_list.include?("at home")]
         csv << row
       end
     end
@@ -142,6 +156,27 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
         csv << [sub.id, sub.record_taken.strftime('%d/%m/%Y'), sub.image_url] + tag_list
       end
     end
+  end
+
+  def create_site_report_with_at_home(site_id, from_date, to_date)
+    attributes = %w[submission-id site-name record-taken record-submitted participant-id at-home relevant]
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      site = Site.find(site_id)
+      submissions ||= site.submissions
+                          .where('submitted_at >= :start_date AND created_at <= :end_date', 
+                            { start_date: from_date, end_date: to_date })
+
+
+     submissions.each do |sub|
+      csv << [sub.id, site.name, sub.record_taken, sub.submitted_at, sub.participant_id, sub.at_home?, relevant(sub)]
+     end
+    end
+  end
+
+  def relevant(submission)
+    # Specific only to HS paper - unessecary and should be removed at a later date
+    (submission.tag_list && ["circle 6, circle 3, cairn entrance, central SS"]).any?
   end
 
   def create_image_quality_report(type_params)

@@ -79,6 +79,11 @@ Submissions by site
       Create report listing submissions with specified tag, or submissions with specified tag for a specific site.
     </span>
 
+    <span class="db pb4">
+      <%= link_to 'at home report',  admin_at_home_report_path(format: "csv", ), class: 'button', id: 'at-home-report' %><br/>
+      Create report listing submissions of specific site, with start and end dates detailing at-home cmapaign. Only useful for machrie and clava.
+    </span>
+
   </div>
 </div>
 
