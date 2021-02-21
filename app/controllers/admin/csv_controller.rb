@@ -176,7 +176,7 @@ class Admin::CsvController < ApplicationController # TODO: - make these all back
 
   def relevant(submission)
     # Specific only to HS paper - unessecary and should be removed at a later date
-    (submission.tag_list && ["circle 6, circle 3, cairn entrance, central SS"]).any?
+    (submission.tag_list & ["circle 6", "circle 3", "cairn entrance", "central SS"]).any?
   end
 
   def create_image_quality_report(type_params)
