@@ -21,7 +21,7 @@
           <td><%= submission.id %></td>
           <td class='image'>
             <span class="modal-login" href="#" data-micromodal-trigger=<%="modal-#{submission.id}"%>>
-              <%= image_tag(url_for(submission.image.variant(resize:"200x200"))) %>
+              <%= image_tag(url_for(submission.image.variant(resize_to_limit: [200, 200]))) %>
             </span>
           </td>
           <td class="sites"><%= f.select :site_id, options_for_select(Site.all.map {|s| [s.name, s.id]}, [submission.site.name, submission.site.id] || "")%></td>
