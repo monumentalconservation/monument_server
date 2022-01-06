@@ -8,8 +8,16 @@ class Submission < ApplicationRecord
   validate :validate_site_id
   validate :validate_participant_id
   validates_presence_of :record_taken
+  # This should work with rails 7 - but isnt.
+  # has_one_attached :image, variants: {
+  #   thumb: { resize: "200x200" }
+  # }
 
-  has_one_attached :image
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize: "100x100"
+  end
+  # has_one_attached :image
+
   # to get url for image when developing API - use s.image.service_url
   TYPE_NAMES = %w(EMAIL TWITTER WHATSAPP INSTAGRAM OTHER )
 
