@@ -6,7 +6,7 @@ RSpec.describe Registration, type: :model do
 
   let(:site) { create(:site) }
   let(:email) { 'email@thing.com' }
-  let(:image) { fixture_file_upload('/assets/test-image.jpg', 'image/png') }
+  let(:image) { fixture_file_upload('/assets/test-image.jpg', "image/png") }
   let(:date)  { Date.today }
   let(:params) do
     {
@@ -48,10 +48,10 @@ RSpec.describe Registration, type: :model do
     end
 
     context 'with invalid file' do
-      let(:image) { fixture_file_upload('/assets/archive_submissions.zip', '.zip') }
+      let(:image) { file_fixture('/assets/archive_submissions.zip') }
 
-      it 'does not create a submission' do
-        expect {subject.save}.to change {Submission.count}.by(1)
+      it 'raises an error' do
+        expect {subject.save}.to raise_error(ArgumentError)
       end
     end
 

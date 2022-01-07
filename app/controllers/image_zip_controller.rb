@@ -16,7 +16,7 @@ class ImageZipController < ApplicationController
     unless obj.exists?
       redirect_back(fallback_location: admin_results_path, alert: "Zip folder not present, you need to create it using 'zip create and download'")
     else
-      redirect_to obj.public_url
+      redirect_to obj.public_url, allow_other_host: true
       flash[:notice] = "Zip file downloading"
     end
   end

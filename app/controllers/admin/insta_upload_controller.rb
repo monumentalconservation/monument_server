@@ -1,4 +1,4 @@
-class InstaUploadController < ApplicationController
+class Admin::InstaUploadController < ApplicationController
   before_action :redirect_unless_admin
 
   def index
