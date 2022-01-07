@@ -4,7 +4,7 @@ class SubmissionSerializer < ActiveModel::Serializer
   attributes :id, :siteName, :siteId, :recordTaken, :ai_tags, :imageUrlSmall,  :imageUrl, :typeName, :comment, :tags
 
   def imageUrlSmall
-    variant = object.image.attachment.variant(resize_to_limit: [300, 300])   
+    variant = object.image.attachment.variant(resize_to_limit: [200, 200])   
     rails_blob_url(variant, only_path: true)
   end
 

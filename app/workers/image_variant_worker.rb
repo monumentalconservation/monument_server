@@ -4,7 +4,7 @@ class ImageVariantWorker
   
   def perform(submission)
     return unless submission&.image&.attached?
-    variant = upload.image.variant(resize_to_limit: [300, nil])
+    variant = upload.image.variant(resize_to_limit: [200, nil])
     
     # This is what triggers the actual transform/cache process
     was_processed = variant.processed
