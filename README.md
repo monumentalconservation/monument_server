@@ -41,6 +41,8 @@ heroku pg:backups:capture --app monument-monitor
 heroku pg:backups:download --app monument-monitor
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U HEROKU_USERNAME -d DEVELOPMENT_DATABASE_NAME latest.dump
 
+(e.g )pg_restore --verbose --clean --no-acl --no-owner -h localhost -U roo -d monumental_server_development latest.dump
+
 Create dump file
 PGPASSWORD=mypassword pg_dump -Fc --no-acl --no-owner -h localhost -U HEROKU_USERNAME PRODUCTION_DATABASE_NAME > ms_prod.dump
 
