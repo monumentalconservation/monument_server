@@ -33,6 +33,7 @@ mm-key.json
 
 /public/packs
 /public/packs-test
+public/packs/manifest.json
 /node_modules
 /yarn-error.log
 yarn-debug.log*

@@ -39,7 +39,7 @@ gem "jquery-rails"
 gem 'haml', '~> 5.0', '>= 5.0.1'
 gem 'font-awesome-rails', '~> 4.5'
 gem 'paperclip'
-gem 'aws-sdk-s3'
+gem 'azure-storage-blob'
 gem 'devise'
 gem 'active_model_serializers'
 gem 'rack-attack'
