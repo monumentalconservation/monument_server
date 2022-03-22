@@ -1,5 +1,3 @@
-require 'aws-sdk-s3'
-
 class ImageZipCreationService
   attr_accessor :tmp_dir, :site_id, :type, :tags
 
