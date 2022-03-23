@@ -1,8 +1,8 @@
-# The same as a registration - except for submissions uploaded via scripts with image URLs instead of attachements
+# The same as a registration - except for submissions uploaded via scripts with image URLs instead of attachements, and tag lists
 class ScriptRegistration
   include ActiveModel::Model
 
-  attr_accessor :submission_id, :reliable, :site_id, :image, :image_file, :record_taken, :submitted_at, :type_name, :participant_id, :type_specific_id, :comment
+  attr_accessor :submission_id, :reliable, :site_id, :image, :image_file, :record_taken, :submitted_at, :type_name, :participant_id, :type_specific_id, :comment, :tag_list
 
   def save
     return false if invalid?
@@ -20,6 +20,7 @@ class ScriptRegistration
           type_name: type_name,
           comment: comment,
           type_specific_id: type_specific_id,
+          tag_list: tag_list,
           image: image)
       else
         submission = Submission.create(site_id: site_id,
@@ -30,6 +31,7 @@ class ScriptRegistration
           type_name: type_name,
           comment: comment,
           type_specific_id: type_specific_id,
+          tag_list: tag_list,
           image: image)
       end
           

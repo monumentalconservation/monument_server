@@ -7,6 +7,7 @@ RSpec.describe ScriptRegistration, type: :model do
   let(:email) { 'email@thing.com' }
   let(:image) { Rails.root.join('spec', 'fixtures', 'assets', 'test-image.jpg') }
   let(:date)  { Date.today }
+  let(:tag_list) { ['substantial', 'circle 6'] }
   let(:params) do
     {
       reliable: true,
@@ -14,6 +15,7 @@ RSpec.describe ScriptRegistration, type: :model do
       record_taken: date,
       type_name: 'EMAIL',
       participant_id: email,
+      tag_list: tag_list,
       image_file: image
     }
   end
@@ -44,6 +46,12 @@ RSpec.describe ScriptRegistration, type: :model do
         expect(submission.image.attached?).to be true
         file_name = "#{submission.id}_#{submission.record_taken.strftime('%d-%m-%Y')}_e.jpg"
         expect(submission.image.attachment.filename.to_s).to eq file_name
+      end
+
+      it 'has correct tags' do
+        subject.save
+        submission = Submission.last
+        expect(submission.tag_list).to eq(['substantial', 'circle 6'])
       end
     end
 
