@@ -30,6 +30,7 @@ class CsvReportUploadJob
           record_taken: record_taken, 
           submitted_at: record_submitted,
           type_name: type_name, 
+          tag_list: tag_list,
           participant_id: ENV['DEFAULT_PARTICIPANT']
         )
         

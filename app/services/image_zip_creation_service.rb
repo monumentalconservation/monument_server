@@ -45,7 +45,7 @@ class ImageZipCreationService
     file = File.open(File.join(tmp_dir, filename), 'wb') do |file|
       begin
       document.download { |chunk| file.write(chunk) }
-      rescue Aws::S3::Errors::ServiceError
+      rescue Azure::Core::Http::HTTPError
         puts 'BUGGER'
       end
     end
