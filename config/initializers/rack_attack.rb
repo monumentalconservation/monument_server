@@ -61,6 +61,21 @@ class Rack::Attack
     end
   end
 
+  # Define safelist for IP
+  allowed = %w[2a00:23c7:a004:5f01:6deb:1c0e:747:3570, 10.230.28.239, 194.32.207.27, 127.0.0.1, ::1]
+  
+  safelist('allow from localhost') do |req|
+    # Requests are allowed if the return value is truthy
+    allowed.include?(req.ip)
+    # '127.0.0.1' == req.ip || '::1' == req.ip
+  end
+  
+  blocklist("block all access those outside VPN") do |request|
+    # Requests are blocked if the return value is truthy
+    !safelist.include? request.ip
+  end
+  
+
   ### Custom Throttle Response ###
 
   # By default, Rack::Attack returns an HTTP 429 for throttled responses,

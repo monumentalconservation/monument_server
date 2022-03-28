@@ -22,3 +22,5 @@
 #DEFAULT_PARTICIPANT=mm@example.com
 #UNSORTED_SITE_NAME=unsorted
 #UNSORTED_SITE_GROUP_NAME=unsortedgroup
+
+#AUTH_TOKEN=topsecret
