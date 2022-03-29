@@ -10,7 +10,9 @@ export default class Form extends React.Component {
       site: '',
       type: '',
       selected: [],
-      reliable: false
+      reliable: false,
+      start: '',
+      end: ''
     }
   }
 
@@ -21,7 +23,9 @@ export default class Form extends React.Component {
     this.props.refineView({reliable: this.state.reliable, 
                            site: this.state.site, 
                            type: this.state.type,
-                           tags: selectedTags})
+                           tags: selectedTags,
+                           start: this.state.start,
+                           end: this.state.end})
   }
 
   handleInputChange = event => {
@@ -45,7 +49,6 @@ export default class Form extends React.Component {
     const selectString = {
                             selectSomeItems: "Select tags",
                           }
-    const typeOptions = ['Email', 'WhatsApp', 'Twitter', 'Instagram']
     const zipButton = <ZipForm email={this.props.email} site={this.state.site} tags={this.state.selected} type={this.state.type}/>
     const defaultSelect = (this.props.siteName && this.props.siteName) || "Select Site"
 
@@ -64,15 +67,6 @@ export default class Form extends React.Component {
             </span>
 
             <span className="h-25 w-100">
-              <select id="type" className="black w-100" placeholder="Select submission type" onChange={this.handleInputChange}>
-                <option defaultValue="">Select submission type</option>
-                {typeOptions.map((type) =>
-                  <option value={type} key={type} className="dark-color w-100">{type}</option>
-                )}
-              </select>
-            </span>
-
-            <span className="h-25 w-100">
               <MultiSelect
                 options={options}
                 value={selected}
@@ -81,17 +75,17 @@ export default class Form extends React.Component {
                 overrideStrings={selectString}
                 />
             </span>
-              
-            {/* <span className="h-25">
-              <select id="tag" className="dark-color w-100" onChange={this.handleInputChange}>
-                <option defaultValue="">Select Tag</option>
-                  {this.props.tags.map((tag) => 
-                    <option 
-                      value={tag} 
-                      key={tag}
-                      className="dark-color w-100">{tag}</option>)}
-              </select>
-            </span> */}
+
+            {/* styling for input are in form.scss */}
+            <span className="h-25 w-100 mt4">
+              <label for="start" class="normal">Start date:</label>
+              <input type="date" id="start" onChange={this.handleInputChange}></input>
+            </span>
+
+            <span className="h-25 w-100">
+              <label for="end"  class="normal">End date:</label>
+              <input type="date" id="end" onChange={this.handleInputChange}></input>
+            </span>
 
             <span className="h-25 w-100 flex justify-around">
               <button className="mt4 white-background dark-color" type="submit" onClick={this.handleSubmit}>

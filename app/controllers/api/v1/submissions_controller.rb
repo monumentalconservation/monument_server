@@ -3,8 +3,8 @@ module Api
     class SubmissionsController < BaseController
 
       def index
-        submissions_scope ||= reliable? ? scope.reliable : scope
-
+        submissions_scope ||= dates_present? ? scope_with_dates : scope
+        
         unsorted_sites.each do |id|
           submissions_scope = submissions_scope.exclude_unsorted(id)
         end
@@ -24,7 +24,20 @@ module Api
       private
 
         def scope
-          Submission.with_attached_image.includes([:site, :taggings, image_attachment: :blob]).search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
+          Submission.with_attached_image
+                    .includes([:site, :taggings, image_attachment: :blob])
+                    .search_site(site_filter)
+                    .type_search(type_filter)
+                    .with_tags(tag_filter)
+        end
+
+        def scope_with_dates
+          Submission.with_attached_image
+                    .where(:record_taken => start_date..end_date.to_time)
+                    .includes([:site, :taggings, image_attachment: :blob])
+                    .search_site(site_filter)
+                    .type_search(type_filter)
+                    .with_tags(tag_filter)
         end
 
         def scope_without_images(date)
@@ -39,19 +52,24 @@ module Api
                         :tags,
                         :bespoke_size,
                         :page,
-                        :pagination)
+                        :start_date,
+                        :end_date)
         end
 
         def page_size
           params[:bespoke_size] || (params[:page] && params[:page][:size]) || 10
         end
-
-        def paginate?
-          permitted_params[:pagination] == "true"
+       
+        def dates_present?
+          permitted_params[:start_date].present? && permitted_params[:end_date].present?
+        end
+        
+        def start_date
+          permitted_params[:start_date].to_date
         end
 
-        def reliable?
-          permitted_params[:reliable] == "true"
+        def end_date
+          permitted_params[:end_date].to_date
         end
 
         def site_filter
