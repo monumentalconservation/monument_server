@@ -24,3 +24,5 @@
 #UNSORTED_SITE_GROUP_NAME=unsortedgroup
 
 #AUTH_TOKEN=topsecret
+
+#IP_ADDRESSES=127.0.0.1,::1

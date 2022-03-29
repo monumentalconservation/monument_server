@@ -62,18 +62,8 @@ class Rack::Attack
   end
 
   # Define safelist for IP
-  allowed = %w[
-    a00:23c7:a004:5f01:6deb:1c0e:747:3570 
-    10.230.28.239 
-    194.32.207.27 
-    194.32.207.1/32
-    194.32.207.27/32
-    193.63.89.8/32
-    194.32.207.0/24
-    194.45.169.164/29
-    127.0.0.1 
-    ::1 
-    217.42.219.139]
+  ip_addresses = "#{ENV['IP_ADDRESSES']}"
+  allowed = ip_addresses.split(",")
   
   # safelist('allow from localhost') do |req|
   #   # Requests are allowed if the return value is truthy
