@@ -10,7 +10,6 @@ export default class Form extends React.Component {
       site: '',
       type: '',
       selected: [],
-      reliable: false,
       start: '',
       end: ''
     }
@@ -20,8 +19,7 @@ export default class Form extends React.Component {
     event.preventDefault()
     // this returns a string of just the labels for selected tags
     const selectedTags = this.state.selected.map(obj => { return obj.label})
-    this.props.refineView({reliable: this.state.reliable, 
-                           site: this.state.site, 
+    this.props.refineView({site: this.state.site, 
                            type: this.state.type,
                            tags: selectedTags,
                            start: this.state.start,
