@@ -3,8 +3,8 @@ module Api
     class SubmissionsController < BaseController
 
       def index
-        submissions_scope ||= reliable? ? scope.reliable : scope
-
+        submissions_scope ||= dates_present? ? scope_with_dates : scope
+        
         unsorted_sites.each do |id|
           submissions_scope = submissions_scope.exclude_unsorted(id)
         end
@@ -14,9 +14,12 @@ module Api
 
       def data
         # TODO - add some specs you lazy sod.
-        date = (Date.today - 1.year).beginning_of_month
-
-        submissions ||= scope_without_images(date)
+        date = start_date || (Date.today - 1.year).beginning_of_month
+        if dates_present? 
+          submissions ||= scope_without_images(start_date, end_date)
+        else
+          submissions ||= scope_without_images(Date.today - 1.year, Date.today)
+        end
         submissions_data = SubmissionsDataCreateService.new(submissions, Date.today - 1.year).create
         render json: submissions_data
       end
@@ -24,11 +27,27 @@ module Api
       private
 
         def scope
-          Submission.with_attached_image.includes([:site, :taggings, image_attachment: :blob]).search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
+          Submission.with_attached_image
+                    .includes([:site, :taggings, image_attachment: :blob])
+                    .search_site(site_filter)
+                    .type_search(type_filter)
+                    .with_tags(tag_filter)
         end
 
-        def scope_without_images(date)
-          Submission.where('record_taken >= ?', date).search_site(site_filter).type_search(type_filter).with_tags(tag_filter)
+        def scope_with_dates
+          Submission.with_attached_image
+                    .where(:record_taken => start_date..end_date)
+                    .includes([:site, :taggings, image_attachment: :blob])
+                    .search_site(site_filter)
+                    .type_search(type_filter)
+                    .with_tags(tag_filter)
+        end
+
+        def scope_without_images(sdate, edate)
+          Submission.where(:record_taken => sdate..edate)
+                    .search_site(site_filter)
+                    .type_search(type_filter)
+                    .with_tags(tag_filter)
         end
 
         def permitted_params
@@ -39,19 +58,24 @@ module Api
                         :tags,
                         :bespoke_size,
                         :page,
-                        :pagination)
+                        :start_date,
+                        :end_date)
         end
 
         def page_size
           params[:bespoke_size] || (params[:page] && params[:page][:size]) || 10
         end
-
-        def paginate?
-          permitted_params[:pagination] == "true"
+       
+        def dates_present?
+          permitted_params[:start_date].present? && permitted_params[:end_date].present?
+        end
+        
+        def start_date
+          permitted_params[:start_date].to_date
         end
 
-        def reliable?
-          permitted_params[:reliable] == "true"
+        def end_date
+          permitted_params[:end_date].to_date
         end
 
         def site_filter

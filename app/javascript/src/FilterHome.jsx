@@ -22,7 +22,6 @@ export default class FilterHome extends React.Component {
       site: '',   
       type: '',
       tags: '',
-      reliable: false, 
       submissions: [],
       links: [],
       allSubmissionsTotal: '', // Popoulated on the first call, and stays that way for dashboard
@@ -59,17 +58,18 @@ export default class FilterHome extends React.Component {
   }
 
   // this refines the view, collecting the images and or data to show
-  refineView = async ({reliable=this.state.reliable, 
-                       site=this.state.site, 
+  refineView = async ({site=this.state.site, 
                        type=this.state.type, 
                        tags=this.state.tags,
                        size=this.state.pageSize,
                        pageNumber=this.state.pageNumber,
                        url="",
-                       dataOnly=this.state.viewDataVis}) => {
+                       dataOnly=this.state.viewDataVis,
+                       start="",
+                       end=""}) => {
     try {
       const endpoint = dataOnly ? 'api/v1/submission_data' : 'api/v1/submissions'
-      const requestURL = url ? url : `${endpoint}?reliable=${reliable}&site_filter=${site}&type_filter=${type}&tags=${tags}&bespoke_size=${size}&page=${pageNumber}`
+      const requestURL = url ? url : `${endpoint}?&site_filter=${site}&type_filter=${type}&tags=${tags}&bespoke_size=${size}&page=${pageNumber}&start_date=${start}&end_date=${end}`
       const response = await fetch(requestURL)
       if (!response.ok) {
       throw Error(response.statusText)
@@ -80,7 +80,6 @@ export default class FilterHome extends React.Component {
       
       // Sets the state of the page wide variables
       this.setState({
-        reliable: reliable,
         site: site, 
         type: type, 
         tags: tags
@@ -109,8 +108,7 @@ export default class FilterHome extends React.Component {
   handleToggle = event => {
     const target = event.target.textContent
     if (target == "Data") {
-      this.refineView({reliable: this.state.reliable, 
-                       site: this.state.site, 
+      this.refineView({site: this.state.site, 
                        type: this.state.type,
                        dataOnly: true})
     } else if (target == "Images") {

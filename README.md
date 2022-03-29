@@ -37,8 +37,8 @@ OR
 bs rails s
 
 ## Download backup and restore DB:
-heroku pg:backups:capture --app monument-monitor
-heroku pg:backups:download --app monument-monitor
+heroku pg:backups:capture --app hes-monument-monitor
+heroku pg:backups:download --app hes-monument-monitor
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U HEROKU_USERNAME -d DEVELOPMENT_DATABASE_NAME latest.dump
 
 Create dump file
