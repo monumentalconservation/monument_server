@@ -2,7 +2,6 @@ import React from 'react';
 import Logo from 'images/logo-2019-inverted.png'
 import SquareLogo from 'images/main-logo-black-squished.jpg'
 
-import Key from './Key.jsx'
 import Form from './Form.jsx'
 import Login from './Login.jsx'
 
@@ -44,7 +43,6 @@ export default class Nav extends React.Component {
             <Form siteNames={this.props.siteNames} tags={this.props.tags} refineView={this.props.refineView} email={this.props.userEmail} siteName={this.props.siteName}/>
             <div className='w-100 absolute-ns bottom-0-ns'>
               <Login userEmail={this.props.userEmail} />
-              <Key />
             </div>
           </div>
         )}
