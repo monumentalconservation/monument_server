@@ -1,7 +1,7 @@
 import React from 'react';
 
 import SubmissionBarChart from './data/SubmissionBarChart'
-// import SubmissionAreaChart from './data/SubmissionAreaChart'
+import SiteBarChart from './data/SiteBarChart'
 import TypePieChart from './data/TypePieChart'
 
 export default class DataVis extends React.Component {
@@ -15,6 +15,7 @@ export default class DataVis extends React.Component {
     const {submissionsData} = this.props
     const monthlyData = submissionsData != "undefined" ? submissionsData.byMonth : []
     const tagData = submissionsData != 'undefined' ? submissionsData.aiTags : []
+    const siteData = submissionsData != 'undefined' ? submissionsData.siteCounts : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
     const minData = submissionsData != 'undefined' ? submissionsData.minSubs : []
 
@@ -43,15 +44,7 @@ export default class DataVis extends React.Component {
               <hr className="w-60 ml0"></hr>
               Least popular
             </div>
-            
-            <div className="w-80 w-40-ns">
-              {/* <TypePieChart data={typeData} /> */}
-              <hr className="w-60 ml0"></hr>
-              Type breakdown
-            </div>
           </div>
-          {/* Eventually there will be a snazzy area chart... if I can be bothered... */}
-          {/* <SubmissionAreaChart data={monthlyData} /> */}
         </div>
 
 
@@ -62,11 +55,16 @@ export default class DataVis extends React.Component {
           <SubmissionBarChart submissionData={monthlyData} color={"#E7ECEF"} dataName={"Submissions"}/>
           <hr className="w-60 ml0 mt0"></hr>
 
-          <h2 className="mb4 f1 title mb2">Tag numbers for all sites</h2>
+          <h2 className="mb4 f1 title mb2">Submissions per site</h2>
           
-          <SubmissionBarChart submissionData={tagData} color={"#379392"} dataName={"Tags"}/>
+          <SiteBarChart submissionData={siteData} color={"#E7ECEF"} dataName={"Submissions per site"}/>
+
+{/* <TypePieChart data={siteData} /> */}
           <hr className="w-60 ml0 mt0"></hr>
 
+          <h2 className="mb4 f1 title mb2">Tags</h2>
+          
+          <TypePieChart data={tagData} />
           
         </div>
 
