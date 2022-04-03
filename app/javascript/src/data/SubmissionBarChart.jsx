@@ -45,18 +45,7 @@ export default class SubmissionBarChart extends React.Component {
               }}
             />
 
-            {/* <VictoryBar
-              data={participantData}
-              labels={({ datum }) => `${Math.floor(datum.y)}`}
-              animate={{
-                duration: 2000,
-              }}
-              barRatio={0.8}
-              alignment="middle"
-              style={{
-                labels: { fontSize: 8, fill: "#379392"}
-              }}
-            /> */}
+           
           </VictoryGroup>
         </VictoryChart>
 
