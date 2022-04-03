@@ -10,6 +10,7 @@ class SubmissionsDataCreateService
     {
       byMonth: create_date_hash(@submissions, @date, 'record_taken'),
       aiTags: ai_tags_object, # WHY IS THIS A DIFFERENT CASE!
+      siteCounts: site_count_object,
       maxSubs: top_scores_object,
       minSubs: bottom_scores_object
     }
@@ -36,6 +37,11 @@ class SubmissionsDataCreateService
 
   def bottom_scores_object
     scores.last(4).map(&:site).map(&:name)
+  end
+
+  def site_count_object
+    object = Site.joins(:submissions).group('sites.id').count
+    object.map {|k,v| {"x" => Site.find(k).name, "y" => v}}
   end
 
   def scores
