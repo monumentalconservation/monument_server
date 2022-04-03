@@ -9,7 +9,8 @@ class SubmissionsDataCreateService
   def create
     {
       byMonth: create_date_hash(@submissions, @date, 'record_taken'),
-      aiTags: ai_tags_object, # WHY IS THIS A DIFFERENT CASE!
+      tagsMost: most_tags_object, 
+      tagsLeast: least_tags_object,
       siteCounts: site_count_object,
       maxSubs: top_scores_object,
       minSubs: bottom_scores_object
@@ -27,8 +28,12 @@ class SubmissionsDataCreateService
     end
   end
 
-  def ai_tags_object
-    @submissions.tag_counts_on(:tags).map {|a| {"x" => a.taggings_count, "y" => a.name, }}
+  def most_tags_object
+    ActsAsTaggableOn::Tag.most_used(7).map {|a| {"x" => a.taggings_count, "y" => a.name, }}
+  end
+
+  def least_tags_object
+    ActsAsTaggableOn::Tag.least_used(7).map {|a| {"x" => a.taggings_count, "y" => a.name, }}
   end
 
   def top_scores_object

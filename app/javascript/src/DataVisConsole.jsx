@@ -2,7 +2,7 @@ import React from 'react';
 
 import SubmissionBarChart from './data/SubmissionBarChart'
 import SiteBarChart from './data/SiteBarChart'
-import TypePieChart from './data/TypePieChart'
+import TagPieChart from './data/TagPieChart'
 
 export default class DataVis extends React.Component {
   constructor(props){
@@ -14,7 +14,8 @@ export default class DataVis extends React.Component {
 
     const {submissionsData} = this.props
     const monthlyData = submissionsData != "undefined" ? submissionsData.byMonth : []
-    const tagData = submissionsData != 'undefined' ? submissionsData.aiTags : []
+    const tagDataMost = submissionsData != 'undefined' ? submissionsData.tagsMost : []
+    const tagDataLeast = submissionsData != 'undefined' ? submissionsData.tagsLeast : []
     const siteData = submissionsData != 'undefined' ? submissionsData.siteCounts : []
     const maxData = submissionsData != 'undefined' ? submissionsData.maxSubs : []
     const minData = submissionsData != 'undefined' ? submissionsData.minSubs : []
@@ -59,12 +60,18 @@ export default class DataVis extends React.Component {
           
           <SiteBarChart submissionData={siteData} color={"#E7ECEF"} dataName={"Submissions per site"}/>
 
-{/* <TypePieChart data={siteData} /> */}
+{/* <TagPieChart data={siteData} /> */}
           <hr className="w-60 ml0 mt0"></hr>
 
-          <h2 className="mb4 f1 title mb2">Tags</h2>
+          <h2 className="mb4 f1 title mb2">Most used tags</h2>
           
-          <TypePieChart data={tagData} />
+          <TagPieChart data={tagDataMost} />
+
+          <hr className="w-60 ml0 mt0"></hr>
+
+          <h2 className="mb4 f1 title mb2">Least used tags</h2>
+          
+          <TagPieChart data={tagDataLeast} />
           
         </div>
 
