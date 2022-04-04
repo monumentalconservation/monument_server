@@ -53,7 +53,7 @@ class ImageZipController < ApplicationController
         if client.get_blob(ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip").present?
           url = File.join(client.host,ENV['STORAGE_CONTAINER'], "archive/#{site_id}_submissions.zip")
         end
-        end
+      end
     rescue Azure::Core::Http::HTTPError
       puts 'BUGGER - FILE NOT FOUND'
     end

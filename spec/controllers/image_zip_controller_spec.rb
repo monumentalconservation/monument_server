@@ -73,13 +73,18 @@ RSpec.describe ImageZipController, :type => :request do
 
       context "if zip file present" do
         before do
-          azure = double("AZURE", present?: true)
-          
-          allow_any_instance_of(Azure::Storage::Blob::BlobService)
-            .to receive(:get_blob)
+          azure = double("AZURE", host: "http://www.example.com/")
+          azure_object = double("AZURE OBJECT", present?: true)
+
+          allow(Azure::Storage::Blob::BlobService)
+            .to receive(:create)
             .and_return(azure)
+
+          allow(azure)
+            .to receive(:get_blob)
+            .and_return(azure_object)
         end
-                
+            
         it "downloads file" do
           subject
           expect(flash[:notice]).to be_present
@@ -91,10 +96,17 @@ RSpec.describe ImageZipController, :type => :request do
       context "if zip file not present" do
         before do
           azure = double("AZURE", present?: false)
-          
-          allow_any_instance_of(Azure::Storage::Blob::BlobService)
-            .to receive(:get_blob)
+          azure_object = double("AZURE OBJECT", present?: false)
+
+          allow(Azure::Storage::Blob::BlobService)
+            .to receive(:create)
             .and_return(azure)
+
+          allow(azure)
+            .to receive(:get_blob)
+            .and_return(azure_object)
+
+  
         end
 
         it "redirects back" do

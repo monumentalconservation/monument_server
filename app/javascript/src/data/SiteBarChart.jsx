@@ -13,15 +13,19 @@ export default class SubmissionBarChart extends React.Component {
     const {color} = this.props
     const {dataName} = this.props
     return (
-      <div>
+      <div className="plf">
         <VictoryChart
           className="mv0"
-          domainPadding={10}
+          domainPadding={1}
+          height={600}
+          width={600}
+          padding={{ top: 10, right: 50, bottom: 10, left: 120}}
         >
           <VictoryAxis 
-            style={{tickLabels: {fill: "#E7ECEF", fontSize: 8 }}} />
+            style={{tickLabels: {fill: "#E7ECEF", fontSize: 8}}}
+           />
           <VictoryGroup offset={10} style={{ data: { width: 10 } }} colorScale={[color]} >
-            <VictoryBar
+            <VictoryBar horizontal
               data={submissionData}
               labels={({ datum }) => `${Math.floor(datum.y)}`}
               animate={{
@@ -38,7 +42,6 @@ export default class SubmissionBarChart extends React.Component {
            
           </VictoryGroup>
         </VictoryChart>
-
       </div>
     )
   }

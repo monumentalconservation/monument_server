@@ -7,13 +7,11 @@ class SubmissionsDataCreateService
   end
 
   def create
-    participants = Participant.where('first_submission >= ?', @date)
     {
       byMonth: create_date_hash(@submissions, @date, 'record_taken'),
-      participantsByMonth: create_date_hash(participants, @date, 'first_submission'),
-      totalParticipants: Participant.count,
-      aiTags: ai_tags_object, # WHY IS THIS A DIFFERENT CASE!
-      types: types_object,
+      tagsMost: most_tags_object, 
+      tagsLeast: least_tags_object,
+      siteCounts: site_count_object,
       maxSubs: top_scores_object,
       minSubs: bottom_scores_object
     }
@@ -30,46 +28,12 @@ class SubmissionsDataCreateService
     end
   end
 
-  def types_object
-    Submission.select(:type_name).group(:type_name).size.map { |name, number| { x: name.capitalize, y: number } }
+  def most_tags_object
+    ActsAsTaggableOn::Tag.most_used(7).map {|a| {"x" => a.taggings_count, "y" => a.name, }}
   end
 
-  def ai_tags_object
-    # get all the tags and their values
-    # binding.pry
-    tags = @submissions.select(:ai_tags).map { |t| t[:ai_tags] }.flatten
-    # create new hash
-    new = {}
-    # flatten them down into one object
-
-    tags.each do |hash|
-      # Hacky hack - due to incorrect migration - needs to be sorted!!
-      next if hash == '{}'
-
-      hash.map do |text, value|
-        if new[text]
-          new[text][:count] += 1
-          new[text][:value] << value.round(2)
-        else
-          new[text] = { count: 1, value: [value.round(2)] }
-        end
-      end
-    end
-
-    # get the mean score for certaintly
-    new.map do |label|
-      array = label[1][:value]
-      mean = array.inject { |sum, el| sum + el }.to_f / array.size
-      label[1][:value] = mean.round(2)
-    end
-
-    # make it into another new object, coz why on earth not...
-    final = []
-    new.map { |label| final << { label: label[0], x: label[1][:value], y: label[1][:count] } }
-    # return the final array
-    # I KNOW THIS IS AWFUL BUT I HAVE A DEADLINE. DON'T JUDGE ME!
-    # sort them and get the last 100
-    final.sort_by { |obj| obj[:y] }.last(70)
+  def least_tags_object
+    ActsAsTaggableOn::Tag.least_used(7).map {|a| {"x" => a.taggings_count, "y" => a.name, }}
   end
 
   def top_scores_object
@@ -80,7 +44,12 @@ class SubmissionsDataCreateService
     scores.last(4).map(&:site).map(&:name)
   end
 
+  def site_count_object
+    object = Site.joins(:submissions).group('sites.id').count
+    object.map {|k,v| {"x" => Site.find(k).name, "y" => v}}
+  end
+
   def scores
-    @scores ||= Submission.select(:site_id).group(:site_id).order('count(site_id) desc')
+    @scores ||= @submissions.select(:site_id).group(:site_id).order('count(site_id) desc')
   end
 end
