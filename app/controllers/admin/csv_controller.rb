@@ -1,5 +1,8 @@
 # TODO: - rename this reports controller or something
 class Admin::CsvController < ApplicationController # TODO: - make these all background jobs
+  before_action :redirect_unless_admin
+
+  
   def basic_submission
     # returns basic report with all submissions
     email = current_user.email

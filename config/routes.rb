@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       resources :registrations
     end
 
+    resources :user_roles
+
     # reporting
     get :participant_report, to: 'csv#participant_report'
     get :basic_submission_report, to: 'csv#basic_submission'
