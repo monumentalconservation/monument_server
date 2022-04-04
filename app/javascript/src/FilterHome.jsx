@@ -4,6 +4,8 @@ import ResultsManager from './ResultsManager.jsx'
 import SubmissionsContextProvider from './SubmissionContext.jsx'
 import DataVisConsole from './DataVisConsole.jsx'
 import Nav from './Nav.jsx'
+import Login from './Login.jsx'
+
 
 export default class FilterHome extends React.Component {
   static propTypes = {
@@ -160,6 +162,7 @@ export default class FilterHome extends React.Component {
           <main className={navCollapsed ? "collapsed ph4" : "full ph4"}>
             {data}
           </main>
+          <Login userEmail={this.props.userEmail} />
         </SubmissionsContextProvider>
       </div>
     );
