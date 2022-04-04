@@ -73,7 +73,9 @@ class Rack::Attack
   
   blocklist("block all access those outside VPN") do |request|
     # Requests are blocked if the return value is truthy
-    !allowed.include? request.ip
+    if Rails.env == 'production'
+      !allowed.include? request.ip
+    end
   end
   
 
