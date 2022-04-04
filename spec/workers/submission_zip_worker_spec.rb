@@ -10,11 +10,11 @@ RSpec.describe SubmissionZipWorker, type: :worker do
   let(:email)       { 'email@yay.com' }
   describe "#perform" do
     before do
-      azure = double("AZURE", present?: true)
+      azure_client = double("AZURE", create_block_blob: public_url)
           
-      allow_any_instance_of(Azure::Storage::Blob::BlobService)
-        .to receive(:create_block_blob)
-        .and_return(azure)
+      allow(Azure::Storage::Blob::BlobService)
+        .to receive(:create)
+        .and_return(azure_client)
 
       service = double("service double")
       allow(ImageZipCreationService).to receive(:new).and_return(service)
