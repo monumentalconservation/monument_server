@@ -1,35 +1,6 @@
 import React from 'react';
 import { VictoryPie, VictoryTooltip, VictoryLabel, VictoryTheme } from 'victory';
 
-// export default class TypePieChart extends React.Component {
-//   constructor(props) {
-//     super(props);
-//   }
-  
-//   render() {
-//     return (
-//       <VictoryPie
-//         data={this.props.data}
-//         labelRadius={140}
-//         radius={200}
-//         innerRadius={130}
-//         style={{ labels: { fill: "white", fontSize: 12, fontWeight: "" } }}
-//         labels={({ datum }) => `${datum.y}: ${datum.x}`}
-//         labelComponent={
-//           <VictoryTooltip 
-//             style={{ fill: "grey", fontSize: 34  }} 
-//             dy={0} 
-//             centerOffset={{ cx: 5 }}
-//             constrainToVisibleArea
-//             pointerLength={0}
-//             flyoutWidth={250}
-//             flyoutHeight={100}/>
-//         }
-//       />
-//     )
-//   }
-// }
-
 class CustomLabel extends React.Component {
   render() {
     return (
