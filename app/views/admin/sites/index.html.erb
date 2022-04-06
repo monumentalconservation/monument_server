@@ -1,13 +1,41 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Sites</h1>
+
+<div class="mw9 center ph3-ns pb2  mb4 bb b--light-gray">
+    <div class="cf ph2-ns pv2 mv2 ">
+      <div class="fl w-10 pa2 b">
+       Site ID
+      </div>
+      <div class="fl w-10 pa2 b">
+        PIC ID
+      </div>
+      <div class="fl w-10 pa2 b">
+        Subs
+      </div>
+      <div class="fl w-40 pa2 b">
+        Site Name
+      </div>
+      <div class="fl w-20 pa2 b">
+        Actions
+      </div>
+    </div>
+  </div>
+
+
 <% @sites.each do |site| %>
   <div class="mw9 center ph3-ns">
     <div class="cf ph2-ns pv2 mv2 ">
       <div class="fl w-10 pa2">
+        <%= site.id %>
+      </div>
+      <div class="fl w-10 pa2">
+        <%= site.pic_id %>
+      </div>
+      <div class="fl w-10 pa2">
         <%= site.submissions.count %>
       </div>
-      <div class="fl w-60 pa2 bb b--light-gray">
+      <div class="fl w-40 pa2 bb b--light-gray">
         <span><%= link_to site.name, admin_site_path(site) %></span>
       </div>
       <div class="fl w-20 pa2">
