@@ -12,9 +12,12 @@
   </head>
   <body class='admin'>
     <nav>
-      <div class="container">
-        <%= image_tag("logo-2019-inverted.png", :alt => "logos", class: "logo") %>
-      </div>
+      <a href="/admin">
+        <div class="container">
+          <%= image_tag("logo-2019-inverted.png", :alt => "logos", class: "logo") %>
+          <%= image_tag("hes-logo.png", :alt => "hes logos", class: "hes-logo logo") %>
+        </div>
+      </a>
       <div class="fr pr5 pt3">
         <% if user_signed_in? %>
           <%= link_to('Logout', destroy_user_session_path, method: :delete) %>        
@@ -23,6 +26,14 @@
         <% end %>
       <div>
     </nav>
+    <div class="nav-list">
+      <ul>
+        <li><a href="/admin/site_groups">Site Groups</a></li>
+        <li><a href="/admin/sites">Sites</a></li>
+        <li><a href="/admin/drop_upload">Upload</a></li>
+        <li><a href="/">Database</a></li>
+      </ul>
+    </div>
     <div class="admin-container">      
       <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
