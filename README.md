@@ -2,7 +2,7 @@
 This application is design to collate and store photographic submissions to the [Monument Monitor project](www.monumentmonitor.co.uk). It is a ruby on rails based application built with a react front end and allows for the easy upload, storage and sorting of submissions to citizen heritage science projects.
 
 This project has been forked for the [Dinosaur Monitor project](https://github.com/Rosie-Brigham/dino_monitor). 
-Hosting is reccomended on either AWS or heroku
+Hosting is reccomended on either AWS or heroku.
 
 # Installation
 To install this application locally, clone/fork the code onto your machine as usual and install the relevant libraries using `bundle install`.
